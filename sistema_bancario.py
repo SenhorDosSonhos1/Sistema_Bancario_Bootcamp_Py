@@ -56,14 +56,15 @@ def depositar(novo_saldo, extrato):
         return novo_saldo, extrato
     
 def vizualizar_extrato(extrato, saldo):
+    print()
     print("=" * 10, 'EXTRATO', "=" * 10)
     for ext in extrato.split('\n'):
         if ext:
             print(ext)
-
-            
+     
     print(f'Saldo atual: R$ {saldo:.2f}')
     print("=" * 20)
+    print()
     
 def sair():
     quit()
@@ -81,21 +82,22 @@ def banco():
         print()
         
         escolha = input('Escolha: ')
-        
-        if escolha == "1":
-            saldo, extrato = depositar(saldo, extrato)
-        elif escolha == '2':
-            saldo, extrato, tentativas_saque = sacar(saldo, extrato, tentativas_saque, LIMITE_TENTATIVAS, limite)
-            
-        elif escolha == '3':
-            vizualizar_extrato(extrato, saldo)
-            
-        elif escolha == '4':
-            sair()
-            
-        else:
-            print('Falha: Opção inválida.')
-  
+        try:
+            if escolha == "1":
+                saldo, extrato = depositar(saldo, extrato)
+            elif escolha == '2':
+                saldo, extrato, tentativas_saque = sacar(saldo, extrato, tentativas_saque, LIMITE_TENTATIVAS, limite)
+                
+            elif escolha == '3':
+                vizualizar_extrato(extrato, saldo)
+                
+            elif escolha == '4':
+                sair()
+                
+            else:
+                print('Falha: Opção inválida.')
+        except TypeError:
+            print('Erro: Informe um valor númerico referente a escolha.')
 
 if __name__ == "__main__":
     banco()
